@@ -46,6 +46,7 @@ const items = [
                     {
                         label: "Ver grupos",
                         icon: "pi pi-search",
+                        route: '/scfv/grupos/ver_grupos',
                     },
                     {
                         label: "Vincular usuários",
