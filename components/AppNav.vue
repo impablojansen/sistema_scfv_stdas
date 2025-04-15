@@ -51,10 +51,12 @@ const items = [
                     {
                         label: "Vincular usuários",
                         icon: "pi pi-user-plus",
+                        route: '/scfv/grupos/vincular_usuario'
                     },
                     {
                         label: "Lista de presença",
                         icon: "pi pi-clipboard",
+                        route: '/scfv/grupos/lista_presenca'
                     }
                 ]
             }, 
