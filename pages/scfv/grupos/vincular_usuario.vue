@@ -83,7 +83,7 @@ function vincular(usuarioId: number) {
         
         <h2 class="text-xl font-semibold text-center uppercase">VINCULAR AO GRUPO {{ grupoSelecionado }}</h2>
         <!-- Tabela de resultados -->
-        <DataTable :value="usuariosFiltrados" showGridlines :rows="3" paginator style="max-width: 19rem" >
+        <DataTable :value="usuariosFiltrados" showGridlines :rows="3" paginator class="w-full" >
           <Column field="nome" header="Nome" style="min-width: 8rem" />
           <Column field="cpf" header="CPF" style="min-width: 8rem" />
           <Column header="Ação" style="min-width: 8rem">

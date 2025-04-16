@@ -5,7 +5,7 @@ const grupos = ref([
     id: 1,
     nome: 'Grupo 1',
     cras: "CRAS Alto Luminoso",
-    faixa_etaria: '12 a 17 anos',
+    faixa_etaria: '07-14',
     dias_semana: ['Terça', 'Quinta'],
     ativo: true
   },
@@ -57,10 +57,10 @@ const gruposFiltrados = computed(() => {
       </div>
   
       <!-- Tabela -->
-      <DataTable :value="gruposFiltrados" paginator :rows="5" responsiveLayout="scroll" style="max-width: 19rem" >
-        <Column field="nome" header="Nome do grupo"  />
-        <Column field="cras" header="CRAS" />
-        <Column field="faixa_etaria" header="Faixa Etária" />
+      <DataTable :value="gruposFiltrados" paginator :rows="5" responsiveLayout="scroll" class="w-full">
+        <Column field="nome" header="Nome do grupo" style="min-width: 8rem" />
+        <Column field="cras" header="CRAS" style="min-width: 8rem" />
+        <Column field="faixa_etaria" header="Faixa Etária" style="min-width: 8rem" />
         <Column field="dias_semana" header="Dias da semana" body="{row => row.dias_semana.join(', ')}" />
         <Column header="Ações" :body="row => h('Button', { label: 'Editar', icon: 'pi pi-pencil', class: 'p-button-sm p-button-secondary' })" />
       </DataTable>

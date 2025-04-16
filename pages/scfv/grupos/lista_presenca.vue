@@ -66,70 +66,45 @@ function enviarPresenca() {
       </div>
   
       <!-- Selecionar data -->
-      <div v-if="grupoSelecionado">
-        <label class="text-sm font-medium">Data</label>
-        <DatePicker v-model="dataPresenca" showIcon fluid iconDisplay="input" class="w-full" />
-      </div>
-
-        <div class="space-x-2 space-y-1 text-center">
-          <Button label="Todos Presentes" size="small" @click="marcarTodos(true)" />
-          <Button label="Todos Ausentes" size="small" severity="secondary" @click="marcarTodos(false)" />
-        </div>
-
-        <DataTable :value="membrosDoGrupo" showGridlines :rows="20" paginator responsiveLayout="scroll" class="w-full" >
-          <Column field="nome" header="Nome" style="min-width: 8rem" />
-          <Column field="cpf" header="CPF" style="min-width: 8rem" />
-          <Column header="Presença" style="min-width: 6rem" >
-            <template #body="{ data }">
-              <Checkbox
-                v-model="presencas[data.id]"
-                :binary="true"
-                class="scale-125"
-              />
-            </template>
-          </Column>
-        </DataTable>
-
-
-
-      <!-- Lista de usuários -->
-      <!--<div v-if="membrosDoGrupo.length > 0">
-        <div class="flex justify-between items-center mb-2 space-x-4">
-          <h3 class="text-md font-semibold">Participantes</h3>
-          
-        </div>
-  
-        <ul class="space-y-2">
-          <li
-            v-for="membro in membrosDoGrupo"
-            :key="membro.id"
-            class="flex justify-between items-center p-2 border rounded"
-          >
-            <span class="truncate">{{ membro.nome }}</span>
-            <Checkbox
-              v-model="presencas[membro.id]"
-              :binary="true"
-              class="scale-125"
-            />
-          </li>
-        </ul>-->
+      <div v-if="grupoSelecionado" class="space-y-4">
         <div>
-  
-        <div class="flex gap-2 mt-4">
-          <Button
-            label="Enviar presença"
-            icon="pi pi-check"
-            class="p-button-success"
-            @click="enviarPresenca"
-          />
-          <Button
-            label="Gerar PDF"
-            icon="pi pi-file-pdf"
-            class="p-button-secondary"
-            disabled
-            title="Em breve"
-          />
+          <label class="text-sm font-medium">Data</label>
+          <DatePicker v-model="dataPresenca" showIcon fluid iconDisplay="input" class="w-full" />
         </div>
+  
+          <div class="space-x-2 space-y-1 text-center">
+            <Button label="Todos Presentes" size="small" @click="marcarTodos(true)" />
+            <Button label="Todos Ausentes" size="small" severity="secondary" @click="marcarTodos(false)" />
+          </div>
+  
+          <DataTable :value="membrosDoGrupo" showGridlines :rows="20" paginator responsiveLayout="scroll" class="w-full" >
+            <Column field="nome" header="Nome" style="min-width: 8rem" />
+            <Column field="cpf" header="CPF" style="min-width: 8rem" />
+            <Column header="Presença" style="min-width: 6rem" >
+              <template #body="{ data }">
+                <Checkbox
+                  v-model="presencas[data.id]"
+                  :binary="true"
+                  class="scale-125"
+                />
+              </template>
+            </Column>
+          </DataTable>
+          <div class="flex gap-2 mt-4 justify-center">
+            <Button
+              label="Enviar presença"
+              icon="pi pi-check"
+              class="p-button-success"
+              @click="enviarPresenca"
+            />
+            <Button
+              label="Gerar PDF"
+              icon="pi pi-file-pdf"
+              class="p-button-secondary"
+              disabled
+              title="Em breve"
+            />
+          </div>
       </div>
     </div>
   </template>
