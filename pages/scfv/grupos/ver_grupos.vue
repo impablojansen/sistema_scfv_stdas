@@ -52,13 +52,13 @@ const gruposFiltrados = computed(() => {
         </div>
         <div class="flex-1">
           <label class="block text-sm font-medium mb-1">Filtrar por faixa etária</label>
-          <Dropdown v-model="faixaEtariaFiltro" :options="faixasEtarias" optionLabel="label" optionValue="value" placeholder="Selecione" class="w-full" />
+          <Select v-model="faixaEtariaFiltro" :options="faixasEtarias" optionLabel="label" optionValue="value" placeholder="Selecione" class="w-full" />
         </div>
       </div>
   
       <!-- Tabela -->
-      <DataTable :value="gruposFiltrados" paginator :rows="5" responsiveLayout="scroll">
-        <Column field="nome" header="Nome do grupo" />
+      <DataTable :value="gruposFiltrados" paginator :rows="5" responsiveLayout="scroll" style="max-width: 19rem" >
+        <Column field="nome" header="Nome do grupo"  />
         <Column field="cras" header="CRAS" />
         <Column field="faixa_etaria" header="Faixa Etária" />
         <Column field="dias_semana" header="Dias da semana" body="{row => row.dias_semana.join(', ')}" />

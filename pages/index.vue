@@ -1,5 +1,5 @@
 <template>
     <div>
-        index.vue
+        Pagina principal em construção
     </div>
 </template>

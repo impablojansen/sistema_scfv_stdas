@@ -17,7 +17,7 @@ const items = [
     label: "SCFV",
     items: [
       {
-        label: "Usuário",
+        label: "Usuário - NÃO IMPLEMENTADO",
         icon: "pi pi-user",
         items: [
           { label: "Novo usuário", icon: "pi pi-plus" },
@@ -51,7 +51,7 @@ const items = [
         ]
       },
       {
-        label: "Métricas",
+        label: "Métricas - NÃO IMPLEMENTADO",
         icon: "pi pi-chart-bar"
       }
     ]

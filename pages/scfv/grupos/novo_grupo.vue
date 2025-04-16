@@ -42,10 +42,28 @@ const submitForm = () => {
 
 </script>
 <template>
-    <div class="max-w-2xl mx-auto mt-8 p-4 bg-white rounded-lg shadow-md">
+    <!--
+      <div class="max-w-2xl mx-auto mt-8 p-4 bg-white rounded-lg shadow-md">
+    
+    -->
+        <div>
       <h1 class="text-2xl font-semibold mb-6 text-gray-700 text-center">Grupo do SCFV</h1>
   
       <form @submit.prevent="submitForm" class="space-y-4">
+        <!-- CRAS -->
+        <div>
+          <label for="cras" class="block text-sm font-medium text-gray-700 mb-1">CRAS</label>
+          <Select
+            id="cras"
+            v-model="form.cras_id"
+            :options="crasList"
+            optionLabel="nome"
+            optionValue="id"
+            placeholder="Selecione o CRAS"
+            class="w-full"
+          />
+        </div>
+
         <!-- Nome -->
         <div>
           <label for="nome" class="block text-sm font-medium text-gray-700 mb-1">Nome do grupo</label>
@@ -55,7 +73,7 @@ const submitForm = () => {
         <!-- Faixa etária -->
         <div>
           <label for="faixaEtaria" class="block text-sm font-medium text-gray-700 mb-1">Faixa etária</label>
-          <Dropdown
+          <Select
             id="faixaEtaria"
             v-model="form.faixa_etaria"
             :options="faixasEtarias"
@@ -69,7 +87,7 @@ const submitForm = () => {
         <!-- Turno -->
         <div>
           <label for="turno" class="block text-sm font-medium text-gray-700 mb-1">Turno</label>
-          <Dropdown
+          <Select
             id="turno"
             v-model="form.turno"
             :options="turnos"
@@ -94,19 +112,6 @@ const submitForm = () => {
           />
         </div>
   
-        <!-- CRAS -->
-        <div>
-          <label for="cras" class="block text-sm font-medium text-gray-700 mb-1">CRAS</label>
-          <Dropdown
-            id="cras"
-            v-model="form.cras_id"
-            :options="crasList"
-            optionLabel="nome"
-            optionValue="id"
-            placeholder="Selecione o CRAS"
-            class="w-full"
-          />
-        </div>
   
         <!-- Botão -->
          <div class="justify-items items-center text-center">

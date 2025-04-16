@@ -7,7 +7,7 @@ const membrosDoGrupo = ref([])
 
 function onGrupoChange() {
   membrosDoGrupo.value = [
-    { id: 1, nome: "João", cpf: '22133144155' },
+    { id: 1, nome: "João da Silva Sauro", cpf: '22133144155' },
   ]
 }
 
@@ -57,7 +57,7 @@ function vincular(usuarioId: number) {
   
       <div>
         <label class="text-sm font-medium">Grupo</label>
-        <Dropdown 
+        <Select 
           v-model="grupoSelecionado"
           :options="grupos"
           optionLabel="nome"
@@ -77,16 +77,16 @@ function vincular(usuarioId: number) {
         </div>
         
         <div>
-          <label class="text-sm font-medium">Buscar por nome</label>
+          <label class="text-sm font-medium">Buscar por CPF</label>
           <InputText v-model="filtroCpf" class="w-full" placeholder="Digite o CPF" />
         </div>
         
-        <h2 class="text-xl font-semibold text-center uppercase">VINCULAR</h2>
+        <h2 class="text-xl font-semibold text-center uppercase">VINCULAR AO GRUPO {{ grupoSelecionado }}</h2>
         <!-- Tabela de resultados -->
-        <DataTable :value="usuariosFiltrados" :rows="5" paginator >
-          <Column field="nome" header="Nome" />
-          <Column field="cpf" header="CPF" />
-          <Column header="Ação">
+        <DataTable :value="usuariosFiltrados" showGridlines :rows="3" paginator style="max-width: 19rem" >
+          <Column field="nome" header="Nome" style="min-width: 8rem" />
+          <Column field="cpf" header="CPF" style="min-width: 8rem" />
+          <Column header="Ação" style="min-width: 8rem">
             <template #body="{ data }">
               <Button
                 label="Vincular"
@@ -100,21 +100,20 @@ function vincular(usuarioId: number) {
       </div>
       
       <div v-if="membrosDoGrupo.length > 0" class="space-y-4">
+        
         <h2 class="text-xl font-semibold text-center uppercase">USUÁRIOS INSCRITOS NO GRUPO {{ grupoSelecionado }}</h2>
   
         <!-- Mostrar usuários inscritos no grupo -->
-        <DataTable :value="membrosDoGrupo" :rows="20" paginator >
-          <Column field="nome" header="Nome" />
-          <Column field="cpf" header="CPF" />
-          <Column header="Ação">
+        <DataTable :value="membrosDoGrupo" showGridlines :rows="20" paginator style="width: 100%" responsiveLayout="scroll" >
+          <Column field="nome" header="Nome" style="min-width: 8rem" />
+          <Column field="cpf" header="CPF" style="min-width: 8rem" />
+          <Column header="Ação" style="min-width: 8rem" >
             <template #body="{ data }">
-              <div class="space-x-2 space-y-2 items-center justify-center text-center">
                 <Button 
                   label="Desvincular"
                   icon="pi pi-times"
                   class="p-button-sm p-button-danger"
                 />
-              </div>
             </template>
           </Column>
         </DataTable>

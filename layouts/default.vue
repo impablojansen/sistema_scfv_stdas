@@ -40,7 +40,7 @@ function fecharMenu() {
     </aside>
 
     <!-- Conteúdo principal -->
-    <main class="flex-1 p-4 bg-gray-50 pt-16 md:pt-4">
+    <main class="flex-1 p-4 bg-gray-50 pt-16 md:pt-4 max-w-screen-2xl w-full mx-auto overflow-x-auto">
       <NuxtPage />
     </main>
   </div>

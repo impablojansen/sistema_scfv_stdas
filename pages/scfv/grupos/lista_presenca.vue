@@ -14,9 +14,9 @@ const presencas = ref<Record<number, boolean>>({})
 function onGrupoChange() {
   // Simular carregamento da API
   membrosDoGrupo.value = [
-    { id: 1, nome: 'João' },
-    { id: 2, nome: 'Maria' },
-    { id: 3, nome: 'Carlos' },
+    { id: 1, nome: 'João da Silva Fernandes', cpf: '00000000000' },
+    { id: 2, nome: 'Maria Soares Lima', cpf: '11111111111' },
+    { id: 3, nome: 'Carlos José Santiago', cpf: '22222222222' },
   ]
   presencas.value = {}
 }
@@ -49,12 +49,12 @@ function enviarPresenca() {
 
 <template>
     <div class="p-4 space-y-4">
-      <h2 class="text-2xl font-semibold mb-4">Lista de Presença</h2>
+      <h2 class="text-2xl font-semibold mb-4 text-center uppercase">Lista de Presença</h2>
   
       <!-- Selecionar grupo -->
       <div>
         <label class="text-sm font-medium">Grupo</label>
-        <Dropdown
+        <Select
           v-model="grupoSelecionado"
           :options="grupos"
           optionLabel="nome"
@@ -70,15 +70,33 @@ function enviarPresenca() {
         <label class="text-sm font-medium">Data</label>
         <DatePicker v-model="dataPresenca" showIcon fluid iconDisplay="input" class="w-full" />
       </div>
-  
+
+        <div class="space-x-2 space-y-1 text-center">
+          <Button label="Todos Presentes" size="small" @click="marcarTodos(true)" />
+          <Button label="Todos Ausentes" size="small" severity="secondary" @click="marcarTodos(false)" />
+        </div>
+
+        <DataTable :value="membrosDoGrupo" showGridlines :rows="20" paginator responsiveLayout="scroll" class="w-full" >
+          <Column field="nome" header="Nome" style="min-width: 8rem" />
+          <Column field="cpf" header="CPF" style="min-width: 8rem" />
+          <Column header="Presença" style="min-width: 6rem" >
+            <template #body="{ data }">
+              <Checkbox
+                v-model="presencas[data.id]"
+                :binary="true"
+                class="scale-125"
+              />
+            </template>
+          </Column>
+        </DataTable>
+
+
+
       <!-- Lista de usuários -->
-      <div v-if="membrosDoGrupo.length > 0">
-        <div class="flex justify-between items-center mb-2">
+      <!--<div v-if="membrosDoGrupo.length > 0">
+        <div class="flex justify-between items-center mb-2 space-x-4">
           <h3 class="text-md font-semibold">Participantes</h3>
-          <div class="space-x-2">
-            <Button label="Todos Presentes" size="small" @click="marcarTodos(true)" />
-            <Button label="Todos Ausentes" size="small" severity="secondary" @click="marcarTodos(false)" />
-          </div>
+          
         </div>
   
         <ul class="space-y-2">
@@ -94,7 +112,8 @@ function enviarPresenca() {
               class="scale-125"
             />
           </li>
-        </ul>
+        </ul>-->
+        <div>
   
         <div class="flex gap-2 mt-4">
           <Button
