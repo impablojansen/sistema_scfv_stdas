@@ -1,10 +1,25 @@
 <script setup lang="ts">
 const termoBusca = ref('')
 const filtroCpf = ref('')
+
+const grupoSelecionado = ref(null)
+const membrosDoGrupo = ref([])
+
+function onGrupoChange() {
+  membrosDoGrupo.value = [
+    { id: 1, nome: "João", cpf: '22133144155' },
+  ]
+}
+
 const usuarios = ref([
-  { id: 1, nome: 'Ana Beatriz', cpf: '11111111111' },
+  { id: 1, nome: 'Ana Beatriz Lima Costa', cpf: '11111111111' },
   { id: 2, nome: 'Ana Paula', cpf: '22222222222' },
   { id: 3, nome: 'João Carlos', cpf: '00000000000' },
+  { id: 4, nome: 'João Pedro', cpf: '33333333333' },
+  { id: 5, nome: 'Maria Silva', cpf: '44444444444' },
+  { id: 6, nome: 'Maria José', cpf: '12345678912' },
+  { id: 7, nome: 'José Costa', cpf: '98765432112' },
+  { id: 8, nome: 'Carlos Miguel', cpf: '12312312312' },
 ])
 
 const grupos = ref([
@@ -37,47 +52,72 @@ function vincular(usuarioId: number) {
 </script>
 
 <template>
-    <div class="p-4">
-      <h2 class="text-2xl font-semibold mb-4">Vincular usuário a grupo</h2>
+    <div class="p-4 space-y-4">
+      <h1 class="text-2xl font-semibold mb-4 text-center uppercase">Vincular usuário a grupo</h1>
   
-      <!-- Filtros de busca -->
-      <div class="flex flex-col md:flex-row gap-4 mb-4">
-        <div class="flex-1">
-          <label class="block text-sm font-medium mb-1">Buscar por nome</label>
-          <InputText v-model="termoBusca" class="w-full" placeholder="Digite o nome..." />
-        </div>
-        <div class="flex-1">
-          <label class="block text-sm font-medium mb-1">Buscar por CPF</label>
-          <InputText v-model="filtroCpf" class="w-full" placeholder="Digite o CPF..." />
-        </div>
+      <div>
+        <label class="text-sm font-medium">Grupo</label>
+        <Dropdown 
+          v-model="grupoSelecionado"
+          :options="grupos"
+          optionLabel="nome"
+          optionValue="id"
+          placeholder="Selecione o grupo"
+          class="w-full"
+          @change="onGrupoChange"
+        />
       </div>
+      
+      <!-- Filtros de busca -->
+      
+      <div v-if="grupoSelecionado" class="space-y-4">
+        <div>
+          <label class="text-sm font-medium">Buscar por nome</label>
+          <InputText v-model="termoBusca" class="w-full" placeholder="Digite o nome" />
+        </div>
+        
+        <div>
+          <label class="text-sm font-medium">Buscar por nome</label>
+          <InputText v-model="filtroCpf" class="w-full" placeholder="Digite o CPF" />
+        </div>
+        
+        <h2 class="text-xl font-semibold text-center uppercase">VINCULAR</h2>
+        <!-- Tabela de resultados -->
+        <DataTable :value="usuariosFiltrados" :rows="5" paginator >
+          <Column field="nome" header="Nome" />
+          <Column field="cpf" header="CPF" />
+          <Column header="Ação">
+            <template #body="{ data }">
+              <Button
+                label="Vincular"
+                icon="pi pi-check"
+                class="p-button-sm p-button-success"
+                @click="vincular(data.id)"
+              />
+            </template>
+          </Column>
+        </DataTable>
+      </div>
+      
+      <div v-if="membrosDoGrupo.length > 0" class="space-y-4">
+        <h2 class="text-xl font-semibold text-center uppercase">USUÁRIOS INSCRITOS NO GRUPO {{ grupoSelecionado }}</h2>
   
-      <!-- Tabela de resultados -->
-      <DataTable :value="usuariosFiltrados" :rows="5" paginator responsiveLayout="scroll">
-        <Column field="nome" header="Nome" />
-        <Column field="cpf" header="CPF" />
-        <Column header="Grupo">
-          <template #body="{ data }">
-            <Dropdown
-              v-model="selecaoGrupo[data.id]"
-              :options="grupos"
-              optionLabel="nome"
-              optionValue="id"
-              placeholder="Selecione"
-              class="w-full"
-            />
-          </template>
-        </Column>
-        <Column header="Ação">
-          <template #body="{ data }">
-            <Button
-              label="Vincular"
-              icon="pi pi-check"
-              class="p-button-sm p-button-success"
-              @click="vincular(data.id)"
-            />
-          </template>
-        </Column>
-      </DataTable>
+        <!-- Mostrar usuários inscritos no grupo -->
+        <DataTable :value="membrosDoGrupo" :rows="20" paginator >
+          <Column field="nome" header="Nome" />
+          <Column field="cpf" header="CPF" />
+          <Column header="Ação">
+            <template #body="{ data }">
+              <div class="space-x-2 space-y-2 items-center justify-center text-center">
+                <Button 
+                  label="Desvincular"
+                  icon="pi pi-times"
+                  class="p-button-sm p-button-danger"
+                />
+              </div>
+            </template>
+          </Column>
+        </DataTable>
+      </div>
     </div>
   </template>

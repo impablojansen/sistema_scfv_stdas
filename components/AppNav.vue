@@ -31,7 +31,7 @@ const items = [
           {
             label: "Novo grupo",
             icon: "pi pi-plus",
-            route: "/scfv/grupos/novo"
+            route: "/scfv/grupos/novo_grupo"
           },
           {
             label: "Ver grupos",

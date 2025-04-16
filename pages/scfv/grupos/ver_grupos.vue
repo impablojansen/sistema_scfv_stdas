@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
 // Simulação de dados (futuramente vem da API)
 const grupos = ref([
   {
     id: 1,
     nome: 'Grupo 1',
-    descricao: 'Grupo de adolescentes',
+    cras: "CRAS Alto Luminoso",
     faixa_etaria: '12 a 17 anos',
     dias_semana: ['Terça', 'Quinta'],
     ativo: true
@@ -14,7 +12,7 @@ const grupos = ref([
   {
     id: 2,
     nome: 'Grupo 2',
-    descricao: 'Grupo de idosos',
+    cras: "CRAS Planalto",
     faixa_etaria: '60+',
     dias_semana: ['Segunda', 'Quarta'],
     ativo: true
@@ -25,11 +23,11 @@ const nomeBusca = ref('')
 const faixaEtariaFiltro = ref(null)
 
 const faixasEtarias = [
-  { label: '0 a 6 anos', value: '0 a 6 anos' },
-  { label: '6 a 12 anos', value: '6 a 12 anos' },
-  { label: '12 a 17 anos', value: '12 a 17 anos' },
-  { label: '18 a 59 anos', value: '18 a 59 anos' },
-  { label: '60+', value: '60+' },
+  { label: '00 a 06 anos', value: '00-06' },
+  { label: '07 a 14 anos', value: '07-14' },
+  { label: '15 a 17 anos', value: '15-17' },
+  { label: '18 a 59 anos', value: '18-59' },
+  { label: '60 anos ou mais', value: '60+' },
 ]
 
 // Filtro simples
@@ -61,7 +59,7 @@ const gruposFiltrados = computed(() => {
       <!-- Tabela -->
       <DataTable :value="gruposFiltrados" paginator :rows="5" responsiveLayout="scroll">
         <Column field="nome" header="Nome do grupo" />
-        <Column field="descricao" header="Descrição" />
+        <Column field="cras" header="CRAS" />
         <Column field="faixa_etaria" header="Faixa Etária" />
         <Column field="dias_semana" header="Dias da semana" body="{row => row.dias_semana.join(', ')}" />
         <Column header="Ações" :body="row => h('Button', { label: 'Editar', icon: 'pi pi-pencil', class: 'p-button-sm p-button-secondary' })" />

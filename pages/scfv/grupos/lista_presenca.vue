@@ -7,7 +7,7 @@ const grupos = ref([
 ])
 
 const grupoSelecionado = ref(null)
-const dataPresenca = ref('')
+const dataPresenca = ref()
 const membrosDoGrupo = ref([])
 const presencas = ref<Record<number, boolean>>({})
 
@@ -49,7 +49,7 @@ function enviarPresenca() {
 
 <template>
     <div class="p-4 space-y-4">
-      <h2 class="text-xl font-semibold">Lista de Presença</h2>
+      <h2 class="text-2xl font-semibold mb-4">Lista de Presença</h2>
   
       <!-- Selecionar grupo -->
       <div>
@@ -68,11 +68,7 @@ function enviarPresenca() {
       <!-- Selecionar data -->
       <div v-if="grupoSelecionado">
         <label class="text-sm font-medium">Data</label>
-        <InputText
-          v-model="dataPresenca"
-          placeholder="dd/mm/aaaa"
-          class="w-full"
-        />
+        <DatePicker v-model="dataPresenca" showIcon fluid iconDisplay="input" class="w-full" />
       </div>
   
       <!-- Lista de usuários -->
